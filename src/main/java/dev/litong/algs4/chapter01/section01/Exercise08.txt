@@ -1,0 +1,4 @@
+1.1.8
+a) 'b' -> String: "b"
+b) 'b' + 'c' -> short -> String "197"
+c) 'a' + 4 -> int -> char -> String "e"
