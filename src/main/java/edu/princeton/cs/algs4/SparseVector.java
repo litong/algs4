@@ -2,7 +2,7 @@
  *  Compilation:  javac SparseVector.java
  *  Execution:    java SparseVector
  *  Dependencies: StdOut.java
- *  
+ *
  *  A sparse vector, implementing using a symbol table.
  *
  *  [Not clear we need the instance variable N except for error checking.]
@@ -18,12 +18,12 @@ package edu.princeton.cs.algs4;
  *  dot product, scalar product, unit vector, and Euclidean norm.
  *  <p>
  *  The implementation is a symbol table of indices and values for which the vector
- *  coordinates are nonzero. This makes it efficient when most of the vector coordindates
+ *  coordinates are nonzero. This makes it efficient when most of the vector coordinates
   * are zero.
  *  <p>
- *  For additional documentation,    
+ *  For additional documentation,
  *  see <a href="https://algs4.cs.princeton.edu/35applications">Section 3.5</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne. 
+ *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *  See also {@link Vector} for an immutable (dense) vector data type.
  *
  *  @author Robert Sedgewick
@@ -138,7 +138,7 @@ public class SparseVector {
     /**
      * Returns the magnitude of this vector.
      * This is also known as the L2 norm or the Euclidean norm.
-     * 
+     *
      * @return the magnitude of this vector
      */
     public double magnitude() {
@@ -186,8 +186,8 @@ public class SparseVector {
 
    /**
      * Returns a string representation of this vector.
-     * @return a string representation of this vector, which consists of the 
-     *         the vector entries, separates by commas, enclosed in parentheses
+     * @return a string representation of this vector, which consists of the
+     *         vector entries, separates by commas, enclosed in parentheses
      */
     public String toString() {
         StringBuilder s = new StringBuilder();
@@ -221,7 +221,7 @@ public class SparseVector {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

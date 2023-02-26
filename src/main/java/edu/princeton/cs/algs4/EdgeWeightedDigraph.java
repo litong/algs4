@@ -15,11 +15,11 @@ package edu.princeton.cs.algs4;
 import java.util.NoSuchElementException;
 
 /**
- *  The {@code EdgeWeightedDigraph} class represents a edge-weighted
+ *  The {@code EdgeWeightedDigraph} class represents an edge-weighted
  *  digraph of vertices named 0 through <em>V</em> - 1, where each
  *  directed edge is of type {@link DirectedEdge} and has a real-valued weight.
  *  It supports the following two primary operations: add a directed edge
- *  to the digraph and iterate over all of edges incident from a given vertex.
+ *  to the digraph and iterate over all edges incident from a given vertex.
  *  It also provides methods for returning the indegree or outdegree of a
  *  vertex, the number of vertices <em>V</em> in the digraph, and
  *  the number of edges <em>E</em> in the digraph.
@@ -35,7 +35,7 @@ import java.util.NoSuchElementException;
  *  Constructing an empty edge-weighted digraph with <em>V</em> vertices
  *  takes &Theta;(<em>V</em>) time; constructing an edge-weighted digraph
  *  with <em>E</em> edges and <em>V</em> vertices takes
- *  &Theta;(<em>E</em> + <em>V</em>) time. 
+ *  &Theta;(<em>E</em> + <em>V</em>) time.
  *  <p>
  *  For additional documentation,
  *  see <a href="https://algs4.cs.princeton.edu/44sp">Section 4.4</a> of
@@ -51,7 +51,7 @@ public class EdgeWeightedDigraph {
     private int E;                      // number of edges in this digraph
     private Bag<DirectedEdge>[] adj;    // adj[v] = adjacency list for vertex v
     private int[] indegree;             // indegree[v] = indegree of vertex v
-    
+
     /**
      * Initializes an empty edge-weighted digraph with {@code V} vertices and 0 edges.
      *
@@ -80,15 +80,15 @@ public class EdgeWeightedDigraph {
         this(V);
         if (E < 0) throw new IllegalArgumentException("Number of edges in a Digraph must be non-negative");
         for (int i = 0; i < E; i++) {
-            int v = StdRandom.uniform(V);
-            int w = StdRandom.uniform(V);
-            double weight = 0.01 * StdRandom.uniform(100);
+            int v = StdRandom.uniformInt(V);
+            int w = StdRandom.uniformInt(V);
+            double weight = 0.01 * StdRandom.uniformInt(100);
             DirectedEdge e = new DirectedEdge(v, w, weight);
             addEdge(e);
         }
     }
 
-    /**  
+    /**
      * Initializes an edge-weighted digraph from the specified input stream.
      * The format is the number of vertices <em>V</em>,
      * followed by the number of edges <em>E</em>,
@@ -121,7 +121,7 @@ public class EdgeWeightedDigraph {
                 double weight = in.readDouble();
                 addEdge(new DirectedEdge(v, w, weight));
             }
-        }   
+        }
         catch (NoSuchElementException e) {
             throw new IllegalArgumentException("invalid input format in EdgeWeightedDigraph constructor", e);
         }
@@ -244,7 +244,7 @@ public class EdgeWeightedDigraph {
             }
         }
         return list;
-    } 
+    }
 
     /**
      * Returns a string representation of this edge-weighted digraph.
@@ -279,7 +279,7 @@ public class EdgeWeightedDigraph {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

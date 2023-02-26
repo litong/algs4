@@ -11,7 +11,7 @@
 package edu.princeton.cs.algs4;
 
 /**
- *  The {@code TopologicalX} class represents a data type for 
+ *  The {@code TopologicalX} class represents a data type for
  *  determining a topological order of a <em>directed acyclic graph</em> (DAG).
  *  A digraph has a topological order if and only if it is a DAG.
  *  The <em>hasOrder</em> operation determines whether the digraph has
@@ -39,7 +39,7 @@ package edu.princeton.cs.algs4;
  */
 public class TopologicalX {
     private Queue<Integer> order;     // vertices in topological order
-    private int[] ranks;              // ranks[v] = order where vertex v appers in order
+    private int[] ranks;              // ranks[v] = order where vertex v appears in order
 
     /**
      * Determines whether the digraph {@code G} has a topological order and, if so,
@@ -54,8 +54,8 @@ public class TopologicalX {
             indegree[v] = G.indegree(v);
         }
 
-        // initialize 
-        ranks = new int[G.V()]; 
+        // initialize
+        ranks = new int[G.V()];
         order = new Queue<Integer>();
         int count = 0;
 
@@ -95,8 +95,8 @@ public class TopologicalX {
             indegree[v] = G.indegree(v);
         }
 
-        // initialize 
-        ranks = new int[G.V()]; 
+        // initialize
+        ranks = new int[G.V()];
         order = new Queue<Integer>();
         int count = 0;
 
@@ -125,9 +125,9 @@ public class TopologicalX {
     }
 
     /**
-     * Returns a topological order if the digraph has a topologial order,
+     * Returns a topological order if the digraph has a topological order,
      * and {@code null} otherwise.
-     * @return a topological order of the vertices (as an interable) if the
+     * @return a topological order of the vertices (as an iterable) if the
      *    digraph has a topological order (or equivalently, if the digraph is a DAG),
      *    and {@code null} otherwise
      */
@@ -145,7 +145,7 @@ public class TopologicalX {
     }
 
     /**
-     * The the rank of vertex {@code v} in the topological order;
+     * The rank of vertex {@code v} in the topological order;
      * -1 if the digraph is not a DAG
      *
      * @param v vertex
@@ -275,8 +275,8 @@ public class TopologicalX {
 
         // add F extra edges
         for (int i = 0; i < F; i++) {
-            int v = StdRandom.uniform(V);
-            int w = StdRandom.uniform(V);
+            int v = StdRandom.uniformInt(V);
+            int w = StdRandom.uniformInt(V);
             G1.addEdge(v, w);
             G2.addEdge(new DirectedEdge(v, w, 0.0));
         }
@@ -291,7 +291,7 @@ public class TopologicalX {
             StdOut.println("Not a DAG");
         }
 
-        // or give topologial sort
+        // or give topological sort
         else {
             StdOut.print("Topological order: ");
             for (int v : topological1.order()) {
@@ -306,7 +306,7 @@ public class TopologicalX {
             StdOut.println("Not a DAG");
         }
 
-        // or give topologial sort
+        // or give topological sort
         else {
             StdOut.print("Topological order: ");
             for (int v : topological2.order()) {
@@ -319,7 +319,7 @@ public class TopologicalX {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

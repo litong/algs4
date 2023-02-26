@@ -6,7 +6,7 @@
  *                https://algs4.cs.princeton.edu/42digraph/mediumDG.txt
  *                https://algs4.cs.princeton.edu/42digraph/largeDG.txt
  *
- *  Run nonrecurisve depth-first search on an directed graph.
+ *  Run nonrecurisve depth-first search on a directed graph.
  *  Runs in O(E + V) time.
  *
  *  Explores the vertices in exactly the same order as DirectedDFS.java.
@@ -45,6 +45,7 @@ import java.util.Iterator;
  */
 public class NonrecursiveDirectedDFS {
     private boolean[] marked;  // marked[v] = is there an s->v path?
+
     /**
      * Computes the vertices reachable from the source vertex {@code s} in the digraph {@code G}.
      * @param  G the digraph
@@ -123,7 +124,7 @@ public class NonrecursiveDirectedDFS {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

@@ -3,7 +3,7 @@
  *  Execution:    java SymbolDigraph
  *  Dependencies: ST.java Digraph.java In.java
  *  Data files:   https://algs4.cs.princeton.edu/42digraph/routes.txt
- *  
+ *
  *  %  java SymbolDigraph routes.txt " "
  *  JFK
  *     MCO
@@ -30,7 +30,7 @@ package edu.princeton.cs.algs4;
  *  This implementation uses an {@link ST} to map from strings to integers,
  *  an array to map from integers to strings, and a {@link Digraph} to store
  *  the underlying graph.
- *  The <em>indexOf</em> and <em>contains</em> operations take time 
+ *  The <em>indexOf</em> and <em>contains</em> operations take time
  *  proportional to log <em>V</em>, where <em>V</em> is the number of vertices.
  *  The <em>nameOf</em> operation takes constant time.
  *  <p>
@@ -45,7 +45,7 @@ public class SymbolDigraph {
     private String[] keys;           // index  -> string
     private Digraph graph;           // the underlying digraph
 
-    /**  
+    /**
      * Initializes a digraph from a file using the specified delimiter.
      * Each line in the file contains
      * the name of a vertex, followed by a list of the names
@@ -118,7 +118,7 @@ public class SymbolDigraph {
 
     /**
      * Returns the name of the vertex associated with the integer {@code v}.
-     * @param  v the integer corresponding to a vertex (between 0 and <em>V</em> - 1) 
+     * @param  v the integer corresponding to a vertex (between 0 and <em>V</em> - 1)
      * @return the name of the vertex associated with the integer {@code v}
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
      * @deprecated Replaced by {@link #nameOf(int)}.
@@ -131,7 +131,7 @@ public class SymbolDigraph {
 
     /**
      * Returns the name of the vertex associated with the integer {@code v}.
-     * @param  v the integer corresponding to a vertex (between 0 and <em>V</em> - 1) 
+     * @param  v the integer corresponding to a vertex (between 0 and <em>V</em> - 1)
      * @return the name of the vertex associated with the integer {@code v}
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
      */
@@ -141,7 +141,7 @@ public class SymbolDigraph {
     }
 
     /**
-     * Returns the digraph assoicated with the symbol graph. It is the client's responsibility
+     * Returns the digraph associated with the symbol graph. It is the client's responsibility
      * not to mutate the digraph.
      *
      * @return the digraph associated with the symbol digraph
@@ -153,7 +153,7 @@ public class SymbolDigraph {
     }
 
     /**
-     * Returns the digraph assoicated with the symbol graph. It is the client's responsibility
+     * Returns the digraph associated with the symbol graph. It is the client's responsibility
      * not to mutate the digraph.
      *
      * @return the digraph associated with the symbol digraph
@@ -182,14 +182,14 @@ public class SymbolDigraph {
         while (!StdIn.isEmpty()) {
             String t = StdIn.readLine();
             for (int v : graph.adj(sg.index(t))) {
-                StdOut.println("   " + sg.name(v));
+                StdOut.println("   " + sg.nameOf(v));
             }
         }
     }
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

@@ -35,12 +35,12 @@ package edu.princeton.cs.algs4;
  *  The running time is proportional to <em>V</em><sup>3</sup> in the
  *  worst case, where <em>V</em> is the number of currencies.
  *  <p>
- *  This code is guaranteed to find an arbitrage opportunity in a 
- *  currency exchange table (or report that no such arbitrage 
+ *  This code is guaranteed to find an arbitrage opportunity in a
+ *  currency exchange table (or report that no such arbitrage
  *  opportunity exists) under the assumption that all arithmetic
  *  performed is without floating-point rounding error or arithmetic
  *  overflow. Since the code computes the logarithms of the edge weights,
- *  floating-point rounding error will be present and it may fail on
+ *  floating-point rounding error will be present, and it may fail on
  *  some pathological inputs.
  *  <p>
  *  For additional documentation,
@@ -96,7 +96,7 @@ public class Arbitrage {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

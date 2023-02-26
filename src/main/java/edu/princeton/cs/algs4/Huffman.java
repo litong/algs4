@@ -116,7 +116,7 @@ public class Huffman {
     // build the Huffman trie given frequencies
     private static Node buildTrie(int[] freq) {
 
-        // initialze priority queue with singleton trees
+        // initialize priority queue with singleton trees
         MinPQ<Node> pq = new MinPQ<Node>();
         for (char c = 0; c < R; c++)
             if (freq[c] > 0)
@@ -163,7 +163,7 @@ public class Huffman {
     public static void expand() {
 
         // read in Huffman trie from input stream
-        Node root = readTrie(); 
+        Node root = readTrie();
 
         // number of bytes to write
         int length = BinaryStdIn.readInt();
@@ -207,7 +207,7 @@ public class Huffman {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

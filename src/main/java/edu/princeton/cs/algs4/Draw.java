@@ -8,7 +8,7 @@
  *  allows you to create drawings consisting of points, lines, and curves
  *  in a window on your computer and to save the drawings to a file.
  *  This is the object-oriented version of standard draw; it supports
- *  multiple indepedent drawing windows.
+ *  multiple independent drawing windows.
  *
  *  Todo
  *  ----
@@ -53,8 +53,6 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.DirectColorModel;
-import java.awt.image.WritableRaster;
 
 import java.io.File;
 import java.io.IOException;
@@ -82,7 +80,7 @@ import javax.swing.KeyStroke;
  *  allows you to create drawings consisting of points, lines, and curves
  *  in a window on your computer and to save the drawings to a file.
  *  This is the object-oriented version of standard draw; it supports
- *  multiple indepedent drawing windows.
+ *  multiple independent drawing windows.
  *  <p>
  *  For additional documentation, see
  *  <a href="https://introcs.cs.princeton.edu/31datatype">Section 3.1</a> of
@@ -169,7 +167,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
      * The RGB values are approximately (103, 198, 243).
      */
     public static final Color BOOK_LIGHT_BLUE = new Color(103, 198, 243);
-    
+
     /**
      * Shade of red used in <em>Algorithms, 4th edition</em>.
      * It is Pantone 1805U. The RGB values are approximately (150, 35, 31).
@@ -202,8 +200,14 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     // default font
     private static final Font DEFAULT_FONT = new Font("SansSerif", Font.PLAIN, 16);
 
+    // default title of drawing window
+    private static final String DEFAULT_TITLE = "Standard Draw";
+
     // current pen color
     private Color penColor;
+
+    // current title of drawing window
+    private String title = DEFAULT_TITLE;
 
     // canvas size
     private int width  = DEFAULT_SIZE;
@@ -216,9 +220,6 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     private boolean defer = false;
 
     private double xmin, ymin, xmax, ymax;
-
-    // name of window
-    private String name = "Draw";
 
     // for synchronization
     private final Object mouseLock = new Object();
@@ -249,16 +250,6 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     // event-based listeners
     private final ArrayList<DrawListener> listeners = new ArrayList<DrawListener>();
 
-
-    /**
-     * Initializes an empty drawing object with the given name.
-     *
-     * @param name the title of the drawing window.
-     */
-    public Draw(String name) {
-        this.name = name;
-        init();
-    }
 
     /**
      * Initializes an empty drawing object.
@@ -304,7 +295,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
         // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);            // closes all windows
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);      // closes only current window
         frame.setFocusTraversalKeysEnabled(false);  // to recognize VK_TAB with isKeyPressed()
-        frame.setTitle(name);
+        frame.setTitle(title);
         frame.setJMenuBar(createMenuBar());
         frame.pack();
         frame.requestFocusInWindow();
@@ -334,13 +325,12 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     public void setDefaultCloseOperation(int value) {
         frame.setDefaultCloseOperation(value);
     }
-       
 
     /**
      * Sets the canvas (drawing area) to be <em>width</em>-by-<em>height</em> pixels.
      * This also erases the current drawing and resets the coordinate system, pen radius,
      * pen color, and font back to their default values.
-     * Ordinarly, this method is called once, at the very beginning of a program.
+     * Ordinarily, this method is called once, at the very beginning of a program.
      *
      * @param  canvasWidth the width as a number of pixels
      * @param  canvasHeight the height as a number of pixels
@@ -371,9 +361,8 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
         return menuBar;
     }
 
-
    /***************************************************************************
-    *  User and screen coordinate systems.
+    *  Input validation helper methods.
     ***************************************************************************/
 
     // throw an IllegalArgumentException if x is NaN or infinite
@@ -392,22 +381,43 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
         if (x == null) throw new IllegalArgumentException(name + " is null");
     }
 
+
+   /***************************************************************************
+    *  Set the title of the drawing window.
+    ***************************************************************************/
+
     /**
-     * Sets the x-scale to be the default (between 0.0 and 1.0).
+     * Sets the title of the drawing window to the specified string.
+     *
+     * @param  title the title
+     * @throws IllegalArgumentException if {@code title} is {@code null}
+     */
+    public void setTitle(String title) {
+        validateNotNull(title, "title");
+        this.title = title;
+        frame.setTitle(title);
+    }
+
+   /***************************************************************************
+    *  User and screen coordinate systems.
+    ***************************************************************************/
+
+    /**
+     * Sets the x-scale to the default range (between 0.0 and 1.0).
      */
     public void setXscale() {
         setXscale(DEFAULT_XMIN, DEFAULT_XMAX);
     }
 
     /**
-     * Sets the y-scale to be the default (between 0.0 and 1.0).
+     * Sets the y-scale to the default range (between 0.0 and 1.0).
      */
     public void setYscale() {
         setYscale(DEFAULT_YMIN, DEFAULT_YMAX);
     }
 
     /**
-     * Sets the x-scale.
+     * Sets the x-scale to the specified range.
      *
      * @param min the minimum value of the x-scale
      * @param max the maximum value of the x-scale
@@ -424,7 +434,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     }
 
     /**
-     * Sets the y-scale.
+     * Sets the y-scale to the specified range.
      *
      * @param min the minimum value of the y-scale
      * @param max the maximum value of the y-scale
@@ -439,6 +449,27 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
         ymin = min - BORDER * size;
         ymax = max + BORDER * size;
     }
+
+    /**
+     * Sets both the x-scale and y-scale to the default range (between 0.0 and 1.0).
+     */
+    public void setScale() {
+        setXscale();
+        setYscale();
+    }
+
+    /**
+     * Sets both the x-scale and y-scale to the (same) specified range.
+     * @param min the minimum value of the y-scale
+     * @param max the maximum value of the y-scale
+     * @throws IllegalArgumentException if {@code (max == min)}
+     * @throws IllegalArgumentException if either {@code min} or {@code max} is either NaN or infinite
+     */
+    public void setScale(double min, double max) {
+        setXscale(min, max);
+        setYscale(min, max);
+    }
+
 
     // helper functions that scale from user coordinates to screen coordinates and back
     private double  scaleX(double x) { return width  * (x - xmin) / (xmax - xmin); }
@@ -897,7 +928,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     }
 
     /**
-     * Draws a polygon with the vertices 
+     * Draws a polygon with the vertices
      * (<em>x</em><sub>0</sub>, <em>y</em><sub>0</sub>),
      * (<em>x</em><sub>1</sub>, <em>y</em><sub>1</sub>), ...,
      * (<em>x</em><sub><em>n</em>–1</sub>, <em>y</em><sub><em>n</em>–1</sub>).
@@ -931,7 +962,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     }
 
     /**
-     * Draws a filled polygon with the vertices 
+     * Draws a filled polygon with the vertices
      * (<em>x</em><sub>0</sub>, <em>y</em><sub>0</sub>),
      * (<em>x</em><sub>1</sub>, <em>y</em><sub>1</sub>), ...,
      * (<em>x</em><sub><em>n</em>–1</sub>, <em>y</em><sub><em>n</em>–1</sub>).
@@ -978,7 +1009,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
         ImageIcon icon = new ImageIcon(filename);
 
         // try to read from URL
-        if ((icon == null) || (icon.getImageLoadStatus() != MediaTracker.COMPLETE)) {
+        if (icon.getImageLoadStatus() != MediaTracker.COMPLETE) {
             try {
                 URL url = new URL(filename);
                 icon = new ImageIcon(url);
@@ -989,14 +1020,14 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
         }
 
         // in case file is inside a .jar (classpath relative to StdDraw)
-        if ((icon == null) || (icon.getImageLoadStatus() != MediaTracker.COMPLETE)) {
+        if (icon.getImageLoadStatus() != MediaTracker.COMPLETE) {
             URL url = StdDraw.class.getResource(filename);
             if (url != null)
                 icon = new ImageIcon(url);
         }
 
         // in case file is inside a .jar (classpath relative to root of jar)
-        if ((icon == null) || (icon.getImageLoadStatus() != MediaTracker.COMPLETE)) {
+        if (icon.getImageLoadStatus() != MediaTracker.COMPLETE) {
             URL url = Draw.class.getResource("/" + filename);
             if (url == null) throw new IllegalArgumentException("image " + filename + " not found");
             icon = new ImageIcon(url);
@@ -1007,7 +1038,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
 
     /**
      * Draws the specified image centered at (<em>x</em>, <em>y</em>).
-     * The supported image formats are JPEG, PNG, and GIF.
+     * The supported image formats are typically JPEG, PNG, GIF, TIFF, and BMP.
      * As an optimization, the picture is cached, so there is no performance
      * penalty for redrawing the same image multiple times (e.g., in an animation).
      * However, if you change the picture file after drawing it, subsequent
@@ -1038,7 +1069,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     /**
      * Draws the specified image centered at (<em>x</em>, <em>y</em>),
      * rotated given number of degrees.
-     * The supported image formats are JPEG, PNG, and GIF.
+     * The supported image formats are typically JPEG, PNG, GIF, TIFF, and BMP.
      *
      * @param  x the center <em>x</em>-coordinate of the image
      * @param  y the center <em>y</em>-coordinate of the image
@@ -1071,7 +1102,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     /**
      * Draws the specified image centered at (<em>x</em>, <em>y</em>),
      * rescaled to the specified bounding box.
-     * The supported image formats are JPEG, PNG, and GIF.
+     * The supported image formats are typically JPEG, PNG, GIF, TIFF, and BMP.
      *
      * @param  x the center <em>x</em>-coordinate of the image
      * @param  y the center <em>y</em>-coordinate of the image
@@ -1113,7 +1144,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     /**
      * Draws the specified image centered at (<em>x</em>, <em>y</em>), rotated
      * given number of degrees, and rescaled to the specified bounding box.
-     * The supported image formats are JPEG, PNG, and GIF.
+     * The supported image formats are typically JPEG, PNG, GIF, TIFF, and BMP.
      *
      * @param  x the center <em>x</em>-coordinate of the image
      * @param  y the center <em>y</em>-coordinate of the image
@@ -1293,7 +1324,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     }
 
     /**
-     * Enable double buffering. All subsequent calls to 
+     * Enable double buffering. All subsequent calls to
      * drawing methods such as {@code line()}, {@code circle()},
      * and {@code square()} will be deferred until the next call
      * to show(). Useful for animations.
@@ -1303,7 +1334,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     }
 
     /**
-     * Disable double buffering. All subsequent calls to 
+     * Disable double buffering. All subsequent calls to
      * drawing methods such as {@code line()}, {@code circle()},
      * and {@code square()} will be displayed on screen when called.
      * This is the default.
@@ -1314,52 +1345,34 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
 
     /**
      * Saves the drawing to using the specified filename.
-     * The supported image formats are JPEG and PNG;
-     * the filename suffix must be {@code .jpg} or {@code .png}.
+     * The supported image formats are typically JPEG, PNG, GIF, TIFF, and BMP.
      *
      * @param  filename the name of the file with one of the required suffixes
      * @throws IllegalArgumentException if {@code filename} is {@code null}
      */
     public void save(String filename) {
         validateNotNull(filename, "filename");
+        if (filename.length() == 0) throw new IllegalArgumentException("argument to save() is the empty string");
         File file = new File(filename);
         String suffix = filename.substring(filename.lastIndexOf('.') + 1);
+        if (!filename.contains(".")) suffix = "";
 
-        // png files
-        if ("png".equalsIgnoreCase(suffix)) {
-            try {
-                ImageIO.write(offscreenImage, suffix, file);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            // if the file format supports transparency (such as PNG or GIF)
+            if (ImageIO.write(onscreenImage, suffix, file)) return;
+
+            // if the file format does not support transparency (such as JPEG or BMP)
+            BufferedImage saveImage = new BufferedImage(2*width, 2*height, BufferedImage.TYPE_INT_RGB);
+            saveImage.createGraphics().drawImage(onscreenImage, 0, 0, Color.WHITE, null);
+            if (ImageIO.write(saveImage, suffix, file)) return;
+
+            // failed to save the file; probably wrong format
+            System.out.printf("Error: the filetype '%s' is not supported\n", suffix);
         }
-
-        // need to change from ARGB to RGB for jpeg
-        // reference: http://archives.java.sun.com/cgi-bin/wa?A2=ind0404&L=java2d-interest&D=0&P=2727
-        else if ("jpg".equalsIgnoreCase(suffix)) {
-            WritableRaster raster = offscreenImage.getRaster();
-            WritableRaster newRaster;
-            newRaster = raster.createWritableChild(0, 0, width, height, 0, 0, new int[] {0, 1, 2});
-            DirectColorModel cm = (DirectColorModel) offscreenImage.getColorModel();
-            DirectColorModel newCM = new DirectColorModel(cm.getPixelSize(),
-                                                          cm.getRedMask(),
-                                                          cm.getGreenMask(),
-                                                          cm.getBlueMask());
-            BufferedImage rgbBuffer = new BufferedImage(newCM, newRaster, false,  null);
-            try {
-                ImageIO.write(rgbBuffer, suffix, file);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        else {
-            System.out.println("Invalid image file type: " + suffix);
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
-
 
     /**
      * This method cannot be called directly.
@@ -1386,7 +1399,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
      * @param listener the {\tt DrawListener} argument
      */
     public void addListener(DrawListener listener) {
-        // ensure there is a window for listenting to events
+        // ensure there is a window for listening to events
         show();
         listeners.add(listener);
     }
@@ -1624,7 +1637,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     ***************************************************************************/
 
     private static class RetinaImageIcon extends ImageIcon {
-    
+
         public RetinaImageIcon(Image image) {
             super(image);
         }
@@ -1644,9 +1657,9 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
 
         public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2 = (Graphics2D) g.create();
-            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-            g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+            g2.setRenderingHint(RenderingHints.KEY_RENDERING,     RenderingHints.VALUE_RENDER_QUALITY);
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,  RenderingHints.VALUE_ANTIALIAS_ON);
             g2.scale(0.5, 0.5);
             super.paintIcon(c, g2, x * 2, y * 2);
             g2.dispose();
@@ -1661,7 +1674,8 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
     public static void main(String[] args) {
 
         // create one drawing window
-        Draw draw1 = new Draw("Test client 1");
+        Draw draw1 = new Draw();
+        draw1.setTitle("Test client 1");
         draw1.square(0.2, 0.8, 0.1);
         draw1.filledSquare(0.8, 0.8, 0.2);
         draw1.circle(0.8, 0.2, 0.2);
@@ -1671,8 +1685,9 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
 
 
         // create another one
-        Draw draw2 = new Draw("Test client 2");
+        Draw draw2 = new Draw();
         draw2.setCanvasSize(900, 200);
+        draw2.setTitle("Test client 2");
         // draw a blue diamond
         draw2.setPenRadius();
         draw2.setPenColor(Draw.BLUE);
@@ -1690,7 +1705,7 @@ public final class Draw implements ActionListener, MouseListener, MouseMotionLis
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

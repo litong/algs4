@@ -23,7 +23,7 @@ package edu.princeton.cs.algs4;
  *  A <em>vertex cover</em> in a graph is a subset of its vertices such that
  *  every edge is incident to at least one vertex. A <em>minimum vertex cover</em>
  *  is a vertex cover with the minimum number of vertices.
- *  By Konig's theorem, in any biparite
+ *  By Konig's theorem, in any bipartite
  *  graph, the maximum number of edges in matching equals the minimum number
  *  of vertices in a vertex cover.
  *  The maximum matching problem in <em>nonbipartite</em> graphs is
@@ -318,7 +318,7 @@ public class BipartiteMatching {
         if (G.V() < 1000) StdOut.println(G);
 
         BipartiteMatching matching = new BipartiteMatching(G);
-        
+
         // print maximum matching
         StdOut.printf("Number of edges in max matching        = %d\n", matching.size());
         StdOut.printf("Number of vertices in min vertex cover = %d\n", matching.size());
@@ -346,7 +346,7 @@ public class BipartiteMatching {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

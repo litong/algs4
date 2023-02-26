@@ -26,7 +26,7 @@ import java.util.Iterator;
  *  A <em>vertex cover</em> in a graph is a subset of its vertices such that
  *  every edge is incident to at least one vertex. A <em>minimum vertex cover</em>
  *  is a vertex cover with the minimum number of vertices.
- *  By Konig's theorem, in any biparite
+ *  By Konig's theorem, in any bipartite
  *  graph, the maximum number of edges in matching equals the minimum number
  *  of vertices in a vertex cover.
  *  The maximum matching problem in <em>nonbipartite</em> graphs is
@@ -292,7 +292,7 @@ public class HopcroftKarp {
     }
 
     /**************************************************************************
-     *   
+     *
      *  The code below is solely for testing correctness of the data type.
      *
      **************************************************************************/
@@ -349,8 +349,8 @@ public class HopcroftKarp {
         return true;
     }
 
-    /** 
-     * Unit tests the {@code HopcroftKarp} data type.   
+    /**
+     * Unit tests the {@code HopcroftKarp} data type.
      * Takes three command-line arguments {@code V1}, {@code V2}, and {@code E};
      * creates a random bipartite graph with {@code V1} + {@code V2} vertices
      * and {@code E} edges; computes a maximum matching and minimum vertex cover;
@@ -395,7 +395,7 @@ public class HopcroftKarp {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

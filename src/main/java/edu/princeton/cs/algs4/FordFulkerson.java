@@ -4,7 +4,7 @@
  *  Dependencies: FlowNetwork.java FlowEdge.java Queue.java
  *  Data files:   https://algs4.cs.princeton.edu/65maxflow/tinyFN.txt
  *
- *  Ford-Fulkerson algorithm for computing a max flow and 
+ *  Ford-Fulkerson algorithm for computing a max flow and
  *  a min cut using shortest augmenting path rule.
  *
  ******************************************************************************/
@@ -28,7 +28,7 @@ package edu.princeton.cs.algs4;
  *  performed is without floating-point rounding error or arithmetic
  *  overflow. This is guaranteed to be the case if all edge capacities
  *  and initial flow values are integers and the value of the maxflow
- *  does not exceeds 2<sup>52</sup>.
+ *  does not exceed 2<sup>52</sup>.
  *  <p>
  *  For additional documentation, see
  *  <a href="https://algs4.cs.princeton.edu/64maxflow">Section 6.4</a> of
@@ -38,13 +38,13 @@ package edu.princeton.cs.algs4;
  *  @author Kevin Wayne
  */
 public class FordFulkerson {
-    private static final double FLOATING_POINT_EPSILON = 1E-11;
+    private static final double FLOATING_POINT_EPSILON = 1.0E-11;
 
     private final int V;          // number of vertices
     private boolean[] marked;     // marked[v] = true iff s->v path in residual graph
     private FlowEdge[] edgeTo;    // edgeTo[v] = last edge on shortest residual s->v path
     private double value;         // current value of max flow
-  
+
     /**
      * Compute a maximum flow and minimum cut in the network {@code G}
      * from vertex {@code s} to vertex {@code t}.
@@ -76,7 +76,7 @@ public class FordFulkerson {
 
             // augment flow
             for (int v = t; v != s; v = edgeTo[v].other(v)) {
-                edgeTo[v].addResidualFlowTo(v, bottle); 
+                edgeTo[v].addResidualFlowTo(v, bottle);
             }
 
             value += bottle;
@@ -99,7 +99,7 @@ public class FordFulkerson {
      * Returns true if the specified vertex is on the {@code s} side of the mincut.
      *
      * @param  v vertex
-     * @return {@code true} if vertex {@code v} is on the {@code s} side of the micut;
+     * @return {@code true} if vertex {@code v} is on the {@code s} side of the mincut;
      *         {@code false} otherwise
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
      */
@@ -108,14 +108,14 @@ public class FordFulkerson {
         return marked[v];
     }
 
-    // throw an IllegalArgumentException if v is outside prescibed range
+    // throw an IllegalArgumentException if v is outside prescribed range
     private void validate(int v)  {
         if (v < 0 || v >= V)
             throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
     }
 
 
-    // is there an augmenting path? 
+    // is there an augmenting path?
     // if so, upon termination edgeTo[] will contain a parent-link representation of such a path
     // this implementation finds a shortest augmenting path (fewest number of edges),
     // which performs well both in theory and in practice
@@ -270,7 +270,7 @@ public class FordFulkerson {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

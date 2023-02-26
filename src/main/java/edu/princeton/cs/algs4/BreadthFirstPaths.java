@@ -12,12 +12,12 @@
  *
  *  %  java Graph tinyCG.txt
  *  6 8
- *  0: 2 1 5 
- *  1: 0 2 
- *  2: 0 1 3 4 
- *  3: 5 4 2 
- *  4: 3 2 
- *  5: 3 0 
+ *  0: 2 1 5
+ *  1: 0 2
+ *  2: 0 1 3 4
+ *  3: 5 4 2
+ *  4: 3 2
+ *  5: 3 0
  *
  *  %  java BreadthFirstPaths tinyCG.txt 0
  *  0 to 0 (0):  0
@@ -55,7 +55,7 @@ package edu.princeton.cs.algs4;
  *  It uses &Theta;(<em>V</em>) extra space (not including the graph).
  *  <p>
  *  For additional documentation,
- *  see <a href="https://algs4.cs.princeton.edu/41graph">Section 4.1</a>   
+ *  see <a href="https://algs4.cs.princeton.edu/41graph">Section 4.1</a>
  *  of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  *  @author Robert Sedgewick
@@ -90,6 +90,7 @@ public class BreadthFirstPaths {
      * @param G the graph
      * @param sources the source vertices
      * @throws IllegalArgumentException if {@code sources} is {@code null}
+     * @throws IllegalArgumentException if {@code sources} contains no vertices
      * @throws IllegalArgumentException unless {@code 0 <= s < V} for each vertex
      *         {@code s} in {@code sources}
      */
@@ -247,16 +248,15 @@ public class BreadthFirstPaths {
         if (vertices == null) {
             throw new IllegalArgumentException("argument is null");
         }
-        int V = marked.length;
-        int count = 0;
+        int vertexCount = 0;
         for (Integer v : vertices) {
-            count++;
+            vertexCount++;
             if (v == null) {
                 throw new IllegalArgumentException("vertex is null");
             }
             validateVertex(v);
         }
-        if (count == 0) {
+        if (vertexCount == 0) {
             throw new IllegalArgumentException("zero vertices");
         }
     }
@@ -295,7 +295,7 @@ public class BreadthFirstPaths {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

@@ -33,17 +33,17 @@ import java.util.Iterator;
  *  For additional documentation,
  *  see <a href="https://algs4.cs.princeton.edu/42digraph">Section 4.2</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- * 
+ *
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  *  @author Nate Liu
  */
 public class DirectedEulerianCycle {
-    private Stack<Integer> cycle = null;  // Eulerian cycle; null if no such cylce
+    private Stack<Integer> cycle = null;  // Eulerian cycle; null if no such cycle
 
     /**
      * Computes an Eulerian cycle in the specified digraph, if one exists.
-     * 
+     *
      * @param G the digraph
      */
     public DirectedEulerianCycle(Digraph G) {
@@ -89,7 +89,7 @@ public class DirectedEulerianCycle {
 
     /**
      * Returns the sequence of vertices on an Eulerian cycle.
-     * 
+     *
      * @return the sequence of vertices on an Eulerian cycle;
      *         {@code null} if no such cycle
      */
@@ -99,7 +99,7 @@ public class DirectedEulerianCycle {
 
     /**
      * Returns true if the digraph has an Eulerian cycle.
-     * 
+     *
      * @return {@code true} if the digraph has an Eulerian cycle;
      *         {@code false} otherwise
      */
@@ -143,8 +143,8 @@ public class DirectedEulerianCycle {
         for (int v = 0; v < G.V(); v++)
             for (int w : G.adj(v))
                 H.addEdge(v, w);
-        
-        // check that all non-isolated vertices are conneted
+
+        // check that all non-isolated vertices are connected
         int s = nonIsolatedVertex(G);
         BreadthFirstPaths bfs = new BreadthFirstPaths(H, s);
         for (int v = 0; v < G.V(); v++)
@@ -220,7 +220,7 @@ public class DirectedEulerianCycle {
 
         // self loop
         Digraph G4 = new Digraph(V);
-        int v4 = StdRandom.uniform(V);
+        int v4 = StdRandom.uniformInt(V);
         G4.addEdge(v4, v4);
         unitTest(G4, "single self loop");
 
@@ -252,7 +252,7 @@ public class DirectedEulerianCycle {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

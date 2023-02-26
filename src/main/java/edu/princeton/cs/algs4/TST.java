@@ -39,7 +39,7 @@
 package edu.princeton.cs.algs4;
 
 /**
- *  The {@code TST} class represents an symbol table of key-value
+ *  The {@code TST} class represents a symbol table of key-value
  *  pairs, with string keys and generic values.
  *  It supports the usual <em>put</em>, <em>get</em>, <em>contains</em>,
  *  <em>delete</em>, <em>size</em>, and <em>is-empty</em> methods.
@@ -139,7 +139,7 @@ public class TST<Value> {
             throw new IllegalArgumentException("calls put() with null key");
         }
         if (!contains(key)) n++;
-        else if(val == null) n--;       // delete existing key
+        else if (val == null) n--;       // delete existing key
         root = put(root, key, val, 0);
     }
 
@@ -239,7 +239,7 @@ public class TST<Value> {
         collect(root, new StringBuilder(), 0, pattern, queue);
         return queue;
     }
- 
+
     private void collect(Node<Value> x, StringBuilder prefix, int i, String pattern, Queue<String> queue) {
         if (x == null) return;
         char c = pattern.charAt(i);
@@ -298,7 +298,7 @@ public class TST<Value> {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

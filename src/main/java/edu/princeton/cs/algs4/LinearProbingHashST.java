@@ -3,7 +3,7 @@
  *  Execution:    java LinearProbingHashST < input.txt
  *  Dependencies: StdIn.java StdOut.java
  *  Data files:   https://algs4.cs.princeton.edu/34hash/tinyST.txt
- *  
+ *
  *  Symbol-table implementation with linear-probing hash table.
  *
  ******************************************************************************/
@@ -129,7 +129,7 @@ public class LinearProbingHashST<Key, Value> {
     }
 
     /**
-     * Inserts the specified key-value pair into the symbol table, overwriting the old 
+     * Inserts the specified key-value pair into the symbol table, overwriting the old
      * value with the new value if the symbol table already contains the specified key.
      * Deletes the specified key (and its associated value) from this symbol table
      * if the specified value is {@code null}.
@@ -177,8 +177,8 @@ public class LinearProbingHashST<Key, Value> {
     }
 
     /**
-     * Removes the specified key and its associated value from this symbol table     
-     * (if the key is in this symbol table).    
+     * Removes the specified key and its associated value from this symbol table
+     * (if the key is in this symbol table).
      *
      * @param  key the key
      * @throws IllegalArgumentException if {@code key} is {@code null}
@@ -200,7 +200,7 @@ public class LinearProbingHashST<Key, Value> {
         // rehash all keys in same cluster
         i = (i + 1) % m;
         while (keys[i] != null) {
-            // delete keys[i] an vals[i] and reinsert
+            // delete keys[i] and vals[i] and reinsert
             Key   keyToRehash = keys[i];
             Value valToRehash = vals[i];
             keys[i] = null;
@@ -233,7 +233,7 @@ public class LinearProbingHashST<Key, Value> {
     }
 
     // integrity check - don't check after each put() because
-    // integrity not maintained during a delete()
+    // integrity not maintained during a call to delete()
     private boolean check() {
 
         // check that hash table is at most 50% full
@@ -259,7 +259,7 @@ public class LinearProbingHashST<Key, Value> {
      *
      * @param args the command-line arguments
      */
-    public static void main(String[] args) { 
+    public static void main(String[] args) {
         LinearProbingHashST<String, Integer> st = new LinearProbingHashST<String, Integer>();
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
@@ -267,13 +267,13 @@ public class LinearProbingHashST<Key, Value> {
         }
 
         // print keys
-        for (String s : st.keys()) 
-            StdOut.println(s + " " + st.get(s)); 
+        for (String s : st.keys())
+            StdOut.println(s + " " + st.get(s));
     }
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

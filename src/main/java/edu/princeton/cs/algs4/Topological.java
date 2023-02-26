@@ -29,7 +29,7 @@
 package edu.princeton.cs.algs4;
 
 /**
- *  The {@code Topological} class represents a data type for 
+ *  The {@code Topological} class represents a data type for
  *  determining a topological order of a <em>directed acyclic graph</em> (DAG).
  *  A digraph has a topological order if and only if it is a DAG.
  *  The <em>hasOrder</em> operation determines whether the digraph has
@@ -91,9 +91,9 @@ public class Topological {
     }
 
     /**
-     * Returns a topological order if the digraph has a topologial order,
+     * Returns a topological order if the digraph has a topological order,
      * and {@code null} otherwise.
-     * @return a topological order of the vertices (as an interable) if the
+     * @return a topological order of the vertices (as an iterable) if the
      *    digraph has a topological order (or equivalently, if the digraph is a DAG),
      *    and {@code null} otherwise
      */
@@ -122,7 +122,7 @@ public class Topological {
     }
 
     /**
-     * The the rank of vertex {@code v} in the topological order;
+     * The rank of vertex {@code v} in the topological order;
      * -1 if the digraph is not a DAG
      *
      * @param v the vertex
@@ -161,7 +161,7 @@ public class Topological {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

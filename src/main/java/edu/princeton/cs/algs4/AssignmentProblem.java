@@ -23,7 +23,7 @@ package edu.princeton.cs.algs4;
  *  The order of growth of the running time in the worst case is
  *  O(<em>n</em>^3 log <em>n</em>) to solve an <em>n</em>-by-<em>n</em>
  *  instance.
- *  <p> 
+ *  <p>
  *  This computes correct results if all arithmetic performed is
  *  without floating-point rounding error or arithmetic overflow.
  *  This is the case if all edge weights are integers and if none of the
@@ -37,7 +37,7 @@ package edu.princeton.cs.algs4;
  *  @author Kevin Wayne
  */
 public class AssignmentProblem {
-    private static final double FLOATING_POINT_EPSILON = 1E-14;
+    private static final double FLOATING_POINT_EPSILON = 1.0E-14;
     private static final int UNMATCHED = -1;
 
     private int n;              // number of rows and columns
@@ -54,7 +54,7 @@ public class AssignmentProblem {
      * @param  weight the <em>n</em>-by-<em>n</em> matrix of weights
      * @throws IllegalArgumentException unless all weights are nonnegative
      * @throws IllegalArgumentException if {@code weight} is {@code null}
-     */ 
+     */
     public AssignmentProblem(double[][] weight) {
         if (weight == null) throw new IllegalArgumentException("constructor argument is null");
 
@@ -90,7 +90,7 @@ public class AssignmentProblem {
         assert certifySolution();
     }
 
-    // find shortest augmenting path and upate
+    // find shortest augmenting path and update
     private void augment() {
 
         // build residual graph
@@ -131,7 +131,7 @@ public class AssignmentProblem {
     }
 
     // reduced cost of i-j
-    // (subtracting off minWeight reweights all weights to be non-negative)
+    // (subtracting off minWeight re-weights all weights to be non-negative)
     private double reducedCost(int i, int j) {
         double reducedCost = (weight[i][j] - minWeight) + px[i] - py[j];
 
@@ -286,7 +286,7 @@ public class AssignmentProblem {
         double[][] weight = new double[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                weight[i][j] = StdRandom.uniform(900) + 100;  // 3 digits
+                weight[i][j] = StdRandom.uniformInt(900) + 100;  // 3 digits
             }
         }
 
@@ -311,7 +311,7 @@ public class AssignmentProblem {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

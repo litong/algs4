@@ -5,7 +5,7 @@
  *
  *  Solve an m-by-n two-person zero-sum game by reducing it to
  *  linear programming. Assuming A is a strictly positive payoff
- *  matrix, the optimal row and column player strategies are x* an y*,
+ *  matrix, the optimal row and column player strategies are x* and y*,
  *  scaled to be probability distributions.
  *
  *  (P)  max  y^T 1         (D)  min   1^T x
@@ -51,20 +51,20 @@ package edu.princeton.cs.algs4;
  *  @author Kevin Wayne
  */
 public class TwoPersonZeroSumGame {
-    private static final double EPSILON = 1E-8;
+    private static final double EPSILON = 1.0E-8;
 
     private final int m;            // number of rows
     private final int n;            // number of columns
     private LinearProgramming lp;   // linear program solver
     private double constant;        // constant added to each entry in payoff matrix
                                     // (0 if all entries are strictly positive)
- 
+
     /**
      * Determines an optimal solution to the two-sum zero-sum game
      * with the specified payoff matrix.
      *
      * @param  payoff the <em>m</em>-by-<em>n</em> payoff matrix
-     */ 
+     */
     public TwoPersonZeroSumGame(double[][] payoff) {
         m = payoff.length;
         n = payoff[0].length;
@@ -255,7 +255,7 @@ public class TwoPersonZeroSumGame {
             StdOut.printf("%8.4f, ", y[i]);
         StdOut.printf("%8.4f]\n", y[m-1]);
         StdOut.println("value =  " + zerosum.value());
-        
+
     }
 
     // row = { 4/7, 3/7 }, column = { 0, 4/7, 3/7 }, value = 20/7
@@ -346,14 +346,14 @@ public class TwoPersonZeroSumGame {
         double[][] payoff = new double[m][n];
         for (int i = 0; i < m; i++)
             for (int j = 0; j < n; j++)
-                payoff[i][j] = StdRandom.uniform(-0.5, 0.5);
+                payoff[i][j] = StdRandom.uniformDouble(-0.5, 0.5);
         test("random " + m + "-by-" + n, payoff);
     }
 
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

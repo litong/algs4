@@ -40,8 +40,8 @@ package edu.princeton.cs.algs4;
  *  Each instance method takes &Theta;(1) time.
  *  It uses &Theta;(<em>V</em>) extra space (not including the digraph).
  *  <p>
- *  For additional documentation, 
- *  see <a href="https://algs4.cs.princeton.edu/42digraph">Section 4.2</a> of 
+ *  For additional documentation,
+ *  see <a href="https://algs4.cs.princeton.edu/42digraph">Section 4.2</a> of
  *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
  *
  *  @author Robert Sedgewick
@@ -75,6 +75,7 @@ public class BreadthFirstDirectedPaths {
      * @param G the digraph
      * @param sources the source vertices
      * @throws IllegalArgumentException if {@code sources} is {@code null}
+     * @throws IllegalArgumentException if {@code sources} contains no vertices
      * @throws IllegalArgumentException unless each vertex {@code v} in
      *         {@code sources} satisfies {@code 0 <= v < V}
      */
@@ -184,16 +185,15 @@ public class BreadthFirstDirectedPaths {
         if (vertices == null) {
             throw new IllegalArgumentException("argument is null");
         }
-        int V = marked.length;
-        int count = 0;
+        int vertexCount = 0;
         for (Integer v : vertices) {
-            count++;
+            vertexCount++;
             if (v == null) {
                 throw new IllegalArgumentException("vertex is null");
             }
             validateVertex(v);
         }
-        if (count == 0) {
+        if (vertexCount == 0) {
             throw new IllegalArgumentException("zero vertices");
         }
     }
@@ -232,7 +232,7 @@ public class BreadthFirstDirectedPaths {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

@@ -7,7 +7,7 @@
  *  n-length vector c, solve the  LP { max cx : Ax <= b, x >= 0 }.
  *  Assumes that b >= 0 so that x = 0 is a basic feasible solution.
  *
- *  Creates an (m+1)-by-(n+m+1) simplex tableaux with the 
+ *  Creates an (m+1)-by-(n+m+1) simplex tableaux with the
  *  RHS in column m+n, the objective function in row m, and
  *  slack variables in columns m through m+n-1.
  *
@@ -17,22 +17,22 @@ package edu.princeton.cs.algs4;
 
 /**
  *  The {@code LinearProgramming} class represents a data type for solving a
- *  linear program of the form { max cx : Ax &le; b, x &ge; 0 }, where A is a m-by-n
- *  matrix, b is an m-length vector, and c is an n-length vector. For simplicity,
- *  we assume that A is of full rank and that b &ge; 0 so that x = 0 is a basic
- *  feasible soution.
+ *  linear program of the form { max cx : Ax &le; b, x &ge; 0 }, where A is an
+ *  m-by-n matrix, b is an m-length vector, and c is an n-length vector.
+ *  For simplicity, we assume that A is of full rank and that b &ge; 0
+ *  so that x = 0 is a basic feasible solution.
  *  <p>
  *  The data type supplies methods for determining the optimal primal and
  *  dual solutions.
  *  <p>
  *  This is a bare-bones implementation of the <em>simplex algorithm</em>.
- *  It uses Bland's rule to determing the entering and leaving variables.
- *  It is not suitable for use on large inputs. 
+ *  It uses Bland's rule to determine the entering and leaving variables.
+ *  It is not suitable for use on large inputs.
  *  <p>
  *  This computes correct results if all arithmetic performed is
  *  without floating-point rounding error or arithmetic overflow.
  *  In practice, there will be floating-point rounding error
- *  and this implementation is not robust in the presence of 
+ *  and this implementation is not robust in the presence of
  *  such errors.
  *  <p>
  *  For additional documentation, see
@@ -53,7 +53,7 @@ public class LinearProgramming {
 
     /**
      * Determines an optimal solution to the linear program
-     * { max cx : Ax &le; b, x &ge; 0 }, where A is a m-by-n
+     * { max cx : Ax &le; b, x &ge; 0 }, where A is an m-by-n
      * matrix, b is an m-length vector, and c is an n-length vector.
      *
      * @param  A the <em>m</em>-by-<em>b</em> matrix
@@ -61,7 +61,7 @@ public class LinearProgramming {
      * @param  c the <em>n</em>-length cost vector
      * @throws IllegalArgumentException unless {@code b[i] >= 0} for each {@code i}
      * @throws ArithmeticException if the linear program is unbounded
-     */ 
+     */
     public LinearProgramming(double[][] A, double[] b, double[] c) {
         m = b.length;
         n = c.length;
@@ -388,12 +388,12 @@ public class LinearProgramming {
         double[] b = new double[m];
         double[][] A = new double[m][n];
         for (int j = 0; j < n; j++)
-            c[j] = StdRandom.uniform(1000);
+            c[j] = StdRandom.uniformInt(1000);
         for (int i = 0; i < m; i++)
-            b[i] = StdRandom.uniform(1000);
+            b[i] = StdRandom.uniformInt(1000);
         for (int i = 0; i < m; i++)
             for (int j = 0; j < n; j++)
-                A[i][j] = StdRandom.uniform(100);
+                A[i][j] = StdRandom.uniformInt(100);
         LinearProgramming lp = new LinearProgramming(A, b, c);
         test(A, b, c);
     }
@@ -401,7 +401,7 @@ public class LinearProgramming {
 }
 
 /******************************************************************************
- *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2022, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *
